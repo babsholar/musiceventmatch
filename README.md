@@ -4,7 +4,6 @@ Find local music events and browse attending artist's top tracks
 
 ## Project Summary
 
-What the project is about and will allow the user to do
 This web app will allow users to search for upcoming music events in their area and let them browse the artist's top tracks.
   
 ## Technical summary
