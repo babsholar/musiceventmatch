@@ -36,12 +36,17 @@ class Search extends React.Component {
   }
 
   callForUpcomingEvents(metroId) {
+    console.log("Calling for upcoming events");
     const fetchUrl = `/songkick/upcomingEvents?metroId=${metroId}`;
 
     fetch(fetchUrl)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        this.props.onSearchResults(data);
+        this.setState({
+          city: this.state.city,
+          locations: []
+        });
       })
       .catch(err => console.log(err));
   }
@@ -85,7 +90,10 @@ class Search extends React.Component {
           <ul>
             {this.state.locations.map(location => (
               <li className="location-card" key={location.metroArea.id}>
-                <LocationCard location={location} />
+                <LocationCard
+                  location={location}
+                  viewUpcomingEvents={this.callForUpcomingEvents}
+                />
               </li>
             ))}
           </ul>

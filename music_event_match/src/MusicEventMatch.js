@@ -9,12 +9,23 @@ class MusicEventMatch extends React.Component {
     this.state = {
       searchResults: undefined
     };
+
+    this.handleSearchResults = this.handleSearchResults.bind(this);
+  }
+
+  handleSearchResults(searchResults) {
+    this.setState({
+      searchResults: searchResults
+    });
   }
 
   render() {
     return (
       <div>
-        <Search />
+        <Search
+          onSearchResults={this.handleSearchResults}
+          onLocationSearch={this.handleLocationSearch}
+        />
         <SearchResult results={this.state.searchResults} />
         <button>Reset</button>
       </div>

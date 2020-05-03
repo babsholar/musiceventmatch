@@ -32,7 +32,11 @@ app.get("/songkick/upcomingEvents", (req, res) => {
   })
     .then(response => {
       // return the list of event data found
-      res.send(response.data.resultsPage.results.event);
+      if (response.data.resultsPage.results.event) {
+        res.send(response.data.resultsPage.results.event);
+      } else {
+        res.send({ empty: "No Upcoming Events" });
+      }
     })
     .catch(error => {
       res.send(JSON.stringify({ failed: "Sorry no dice" }));

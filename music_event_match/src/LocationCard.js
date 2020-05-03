@@ -5,7 +5,14 @@ class LocationCard extends React.Component {
     return (
       <div>
         <h3>{this.props.location.metroArea.displayName}</h3>
-        <button type="button">View Upcoming Events</button>
+        <button
+          type="button"
+          onClick={() =>
+            this.props.viewUpcomingEvents(this.props.location.metroArea.id)
+          }
+        >
+          View Upcoming Events
+        </button>
       </div>
     );
   }
