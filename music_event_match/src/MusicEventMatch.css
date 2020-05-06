@@ -1,3 +1,5 @@
+/* Fonts */
+
 /* MAIN STYLES */
 .root {
   background-color: #edebeb;
@@ -177,6 +179,7 @@ ul {
 
 .event-card {
   display: inline-flex;
+  justify-content: center;
   flex-direction: row;
   text-align: center;
   font-family: staatliches;
@@ -186,7 +189,7 @@ ul {
   transition: 0.3s;
   border-radius: 5px;
   width: 500px;
-  height: 500px;
+  height: 600px;
   padding: 30px;
   margin: 20px;
 }
@@ -295,6 +298,13 @@ div.results-details {
   text-align: center;
 }
 
+/* Venue */
+
+.venue {
+  display: flex;
+  align-items: center;
+}
+
 /* Media Queries*/
 
 @media only screen and (max-width: 600px) {
@@ -316,5 +326,18 @@ div.results-details {
   .header-nav a {
     float: left;
     width: 100%;
+  }
+
+  .event-card {
+    display: flex;
+    align-content: center;
+    font-size: 10px;
+    height: 350px;
+    width: 250px;
+    margin-left: 70px;
+  }
+
+  .view-button {
+    font-size: 8px;
   }
 }

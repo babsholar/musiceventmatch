@@ -1,11 +1,13 @@
 import React from "react";
 import LocationCard from "./LocationCard";
+import Loader from "react-loader-spinner";
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      loading: false,
       city: "",
       locations: []
     };
@@ -17,26 +19,50 @@ class Search extends React.Component {
     this.callForMetroId = this.callForMetroId.bind(this);
 
     this.callForUpcomingEvents = this.callForUpcomingEvents.bind(this);
+
+    this.checkDisabled = this.checkDisabled.bind(this);
   }
 
   callForMetroId(city) {
+    this.setState({
+      city: this.state.city,
+      locations: this.state.locations,
+      loading: true
+    });
+
     const fetchUrl = `/songkick/metroLocations?city=${city}`;
 
     fetch(fetchUrl)
-      .then(res => res.json())
+      .then(res => {
+        return res.text();
+      })
       .then(data => {
-        // Here, we have the resulting list of location data...
-        // set it in the state of the search component
-        this.setState({
-          city: this.state.city,
-          locations: data
-        });
+        if (data) {
+          // we have a result
+          this.setState({
+            city: this.state.city,
+            locations: JSON.parse(data),
+            loading: false
+          });
+        } else {
+          // user entered a bad city name, or no result
+          this.setState({
+            city: this.state.city,
+            locations: [],
+            loading: false
+          });
+        }
       })
       .catch(err => console.log(err));
   }
 
   callForUpcomingEvents(metroId) {
-    console.log("Calling for upcoming events");
+    this.setState({
+      city: this.state.city,
+      locations: this.state.locations,
+      loading: true
+    });
+
     const fetchUrl = `/songkick/upcomingEvents?metroId=${metroId}`;
 
     fetch(fetchUrl)
@@ -45,10 +71,15 @@ class Search extends React.Component {
         this.props.onSearchResults(data);
         this.setState({
           city: this.state.city,
-          locations: []
+          locations: [],
+          loading: false
         });
       })
       .catch(err => console.log(err));
+  }
+
+  checkDisabled() {
+    return "true";
   }
 
   onHandleChange(e) {
@@ -69,10 +100,39 @@ class Search extends React.Component {
       We need to call the songkick api for the metroId of the given city,
       then we need to call the songkick api for the upcoming events for the returned metroId.
     */
-    this.callForMetroId(city);
+    if (!(city === "")) {
+      this.callForMetroId(city);
+    }
   }
 
   render() {
+    let locationsData;
+
+    if (this.state.loading) {
+      locationsData = (
+        <Loader
+          type="Bars"
+          color="#fc036f"
+          height={100}
+          width={100}
+          timeout={30000}
+        />
+      );
+    } else {
+      locationsData = (
+        <ul className="lo-card">
+          {this.state.locations.map(location => (
+            <li key={location.metroArea.id}>
+              <LocationCard
+                location={location}
+                viewUpcomingEvents={this.callForUpcomingEvents}
+              />
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
     return (
       <div>
         <form>
@@ -92,16 +152,8 @@ class Search extends React.Component {
           >
             Search
           </button>
-          <ul className="lo-card">
-            {this.state.locations.map(location => (
-              <li key={location.metroArea.id}>
-                <LocationCard
-                  location={location}
-                  viewUpcomingEvents={this.callForUpcomingEvents}
-                />
-              </li>
-            ))}
-          </ul>
+
+          {locationsData}
         </form>
       </div>
     );

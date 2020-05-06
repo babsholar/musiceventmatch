@@ -1,26 +1,44 @@
 import React from "react";
+import VenueDetails from "./VenueDetails";
 
 class SearchResultDetails extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      loading: false,
       viewingVenueDetails: false,
       selectedVenue: undefined
     };
 
     this.viewVenueDetails = this.viewVenueDetails.bind(this);
+    this.closeVenueDetails = this.closeVenueDetails.bind(this);
   }
 
   viewVenueDetails(venueId) {
     this.setState({
+      loading: true,
       viewingVenueDetails: true,
-      selectedVenue: venueId
+      selectedVenue: this.state.selectedVenue
     });
+
+    const fetchUrl = `/songkick/venueDetails?venueId=${venueId}`;
+
+    fetch(fetchUrl)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          loading: false,
+          viewingVenueDetails: this.state.viewingVenueDetails,
+          selectedVenue: data
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   closeVenueDetails() {
     this.setState({
+      loading: false,
       viewingVenueDetails: false,
       selectedVenue: undefined
     });
@@ -28,6 +46,7 @@ class SearchResultDetails extends React.Component {
 
   render() {
     let performanceHeader;
+    let venueDetailsButton;
 
     if (this.props.event.performance.length > 1) {
       performanceHeader = <h3>Artists:</h3>;
@@ -35,8 +54,33 @@ class SearchResultDetails extends React.Component {
       performanceHeader = <h3>Artist:</h3>;
     }
 
+    if (
+      this.props.event.venue.displayName.includes("Unknown") ||
+      this.props.event.venue.displayName.includes("unknown") ||
+      this.props.event.venue.displayName.includes("UNKNOWN")
+    ) {
+      venueDetailsButton = null;
+    } else {
+      venueDetailsButton = (
+        <button
+          className="view-button"
+          type="button"
+          onClick={() => this.viewVenueDetails(this.props.event.venue.id)}
+        >
+          View Venue Details
+        </button>
+      );
+    }
+
     return (
       <div className="results-container">
+        <VenueDetails
+          show={this.state.viewingVenueDetails}
+          loading={this.state.loading}
+          venue={this.state.selectedVenue}
+          onHideDetails={this.closeVenueDetails}
+        />
+
         <div className="results-cards">
           <h2 className="results-details">{this.props.event.displayName}</h2>
           <hr />
@@ -47,13 +91,7 @@ class SearchResultDetails extends React.Component {
             <h3 className="results-details">
               Venue: {this.props.event.venue.displayName}
             </h3>
-            <button
-              className="view-button"
-              type="button"
-              onClick={() => this.viewVenueDetails(this.props.event.venue.id)}
-            >
-              View Venue Details
-            </button>
+            {venueDetailsButton}
           </span>
           <h3 className="results-details">
             When: {this.props.event.start.date}

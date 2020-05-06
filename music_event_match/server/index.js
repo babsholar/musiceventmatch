@@ -58,7 +58,7 @@ app.get("/songkick/upcomingEvents", (req, res) => {
     .then(response => {
       // return the list of event data found
       if (response.data.resultsPage.results.event) {
-        console.log(response.data.resultsPage.results.event);
+        console.log(response.data.resultsPage.results.event[0].venue);
         res.send(response.data.resultsPage.results.event);
       } else {
         res.send({ empty: "No Upcoming Events, try a different Metro Area!" });
