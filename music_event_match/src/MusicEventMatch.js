@@ -62,9 +62,6 @@ class MusicEventMatch extends React.Component {
                 nLocationSearch={this.handleLocationSearch}
               />
               <SearchResult results={this.state.searchResults} />
-              {/* <button className="reset" href="/">
-                Reset
-              </button> */}
             </Route>
           </Switch>
 
