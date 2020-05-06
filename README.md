@@ -39,4 +39,8 @@ In order to run the application you will need a .env file in project root with t
 
 - REACT_APP_SKK=<SONGKICK_API_KEY>
 
-To run, navigate to the project root and run the following: `npm install && npm run dev`
+To run, complete the following steps:
+* Navigate to project root. (will need two terminals open, one for server, one for client)
+* Install node modules: `npm install`
+* Start the express server: `npm run server`
+* Start the client app: `npm run start`
