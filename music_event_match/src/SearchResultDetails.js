@@ -91,7 +91,6 @@ class SearchResultDetails extends React.Component {
             <h3 className="results-details">
               Venue: {this.props.event.venue.displayName}
             </h3>
-
             {venueDetailsButton}
           </span>
           <h3 className="results-details">

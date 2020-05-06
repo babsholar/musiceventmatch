@@ -27,12 +27,13 @@ class VenueDetails extends React.Component {
       } else {
         // render the venue details
         return (
-          <div>
-            <p>Hello VenueDetails Modal!</p>
-            <p>Venue: {this.props.venue.displayName}</p>
-            <button type="button" onClick={() => this.hideDetails()}>
-              Close
-            </button>
+          <div className="venue">
+            <div>
+              <p>Venue: {this.props.venue.displayName}</p>
+              <button type="button" onClick={() => this.hideDetails()}>
+                Close
+              </button>
+            </div>
           </div>
         );
       }
