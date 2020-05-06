@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const pino = require("express-pino-logger")();
 const axios = require("axios");
