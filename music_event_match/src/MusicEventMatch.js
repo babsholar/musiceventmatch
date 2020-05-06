@@ -62,15 +62,13 @@ class MusicEventMatch extends React.Component {
                 nLocationSearch={this.handleLocationSearch}
               />
               <SearchResult results={this.state.searchResults} />
-              <Route path="/">
-                <button className="reset" href="./musiceventmatch.js">
-                  Reset
-                </button>
-              </Route>
+              <button className="reset" href="/">
+                Reset
+              </button>
             </Route>
           </Switch>
 
-          <div class="footer">
+          <div className="footer">
             <p>Thank you for visiting</p>
             <img className="banner" src={image} alt="songKick banner"></img>
           </div>
