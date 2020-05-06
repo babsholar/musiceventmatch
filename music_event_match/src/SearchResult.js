@@ -9,7 +9,7 @@ class SearchResult extends React.Component {
       return <h2>{this.props.results.empty}</h2>;
     }
     return (
-      <div>
+      <div className="container">
         <ul>
           {this.props.results.map(event => (
             <li className="event-card" key={event.id}>

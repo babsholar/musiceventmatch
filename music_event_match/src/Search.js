@@ -74,22 +74,27 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="search">
         <form>
-          <p>Current city is: {this.state.city}</p>
+          <p className="searchHeader">WHERE IS THE MUSIC: {this.state.city}</p>
           <input
+            className="searchInput"
             id="mainInput"
             onChange={this.onHandleChange}
             placeholder="Enter City"
             value={this.state.city}
             type="text"
           />
-          <button onClick={this.onHandleSubmit} type="submit">
+          <button
+            className="searchButton"
+            onClick={this.onHandleSubmit}
+            type="submit"
+          >
             Search
           </button>
-          <ul>
+          <ul className="lo-card">
             {this.state.locations.map(location => (
-              <li className="location-card" key={location.metroArea.id}>
+              <li key={location.metroArea.id}>
                 <LocationCard
                   location={location}
                   viewUpcomingEvents={this.callForUpcomingEvents}
