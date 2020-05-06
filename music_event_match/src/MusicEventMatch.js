@@ -1,7 +1,11 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import About from "./About";
+import Contact from "./Contact";
 import Search from "./Search";
 import SearchResult from "./SearchResult";
 import logo from "./skblackbadge.png";
+import image from "./skblackbanner.png";
 import "./MusicEventMatch.css";
 
 class MusicEventMatch extends React.Component {
@@ -22,21 +26,56 @@ class MusicEventMatch extends React.Component {
 
   render() {
     return (
-      <div className="root">
-        <header>
-          <img className="header-logo" src={logo} alt="songkick-logo"></img>
-          MUSIC EVENT MATCH
-        </header>
+      <Router>
+        <div className="root">
+          <header>
+            <img className="header-logo" src={logo} alt="songkick-logo"></img>
+            MUSIC EVENT MATCH
+          </header>
 
-        <Search
-          onSearchResults={this.handleSearchResults}
-          onLocationSearch={this.handleLocationSearch}
-        />
+          <div className="header-nav">
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+                <li>
+                  <Link to="/contact">Contact</Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
 
-        <SearchResult results={this.state.searchResults} />
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/contact">
+              <Contact />
+            </Route>
+            <Route path="/">
+              <Search
+                onSearchResults={this.handleSearchResults}
+                nLocationSearch={this.handleLocationSearch}
+              />
+              <SearchResult results={this.state.searchResults} />
+              <Route path="/">
+                <button className="reset" href="./musiceventmatch.js">
+                  Reset
+                </button>
+              </Route>
+            </Route>
+          </Switch>
 
-        <button className="reset">Take Me Back</button>
-      </div>
+          <div class="footer">
+            <p>Thank you for visiting</p>
+            <img className="banner" src={image} alt="songKick banner"></img>
+          </div>
+        </div>
+      </Router>
     );
   }
 }

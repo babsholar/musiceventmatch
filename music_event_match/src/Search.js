@@ -74,11 +74,11 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className="search">
+      <div>
         <form>
-          <p className="searchHeader">WHERE IS THE MUSIC: {this.state.city}</p>
+          <p className="search-header">WHERE IS THE MUSIC: {this.state.city}</p>
           <input
-            className="searchInput"
+            className="search"
             id="mainInput"
             onChange={this.onHandleChange}
             placeholder="Enter City"
@@ -86,7 +86,7 @@ class Search extends React.Component {
             type="text"
           />
           <button
-            className="searchButton"
+            className="search-button"
             onClick={this.onHandleSubmit}
             type="submit"
           >

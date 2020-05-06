@@ -20,7 +20,7 @@ class LocationCard extends React.Component {
             Metro Area : {this.props.location.metroArea.displayName}
           </h4>
           <button
-            class="location-button"
+            className="location-button"
             type="button"
             onClick={() =>
               this.props.viewUpcomingEvents(this.props.location.metroArea.id)

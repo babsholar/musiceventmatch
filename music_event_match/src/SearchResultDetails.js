@@ -36,28 +36,42 @@ class SearchResultDetails extends React.Component {
     }
 
     return (
-      <div>
-        <h2>{this.props.event.displayName}</h2>
-        <hr />
-        <h3>Event Type: {this.props.event.type}</h3>
-        <span>
-          <h3>Venue: {this.props.event.venue.displayName}</h3>
-          <button
-            type="button"
-            onClick={() => this.viewVenueDetails(this.props.event.venue.id)}
-          >
-            View Venue Details
-          </button>
-        </span>
-        <h3>When: {this.props.event.start.date}</h3>
-        <a href={this.props.event.uri}>See it on songkick!</a>
-        <hr />
-        {performanceHeader}
-        <ul>
-          {this.props.event.performance.map(performanceDetails => (
-            <li>{performanceDetails.artist.displayName}</li>
-          ))}
-        </ul>
+      <div className="results-container">
+        <div className="results-cards">
+          <h2 className="results-details">{this.props.event.displayName}</h2>
+          <hr />
+          <h3 className="results-details">
+            Event Type: {this.props.event.type}
+          </h3>
+          <span>
+            <h3 className="results-details">
+              Venue: {this.props.event.venue.displayName}
+            </h3>
+            <button
+              className="view-button"
+              type="button"
+              onClick={() => this.viewVenueDetails(this.props.event.venue.id)}
+            >
+              View Venue Details
+            </button>
+          </span>
+          <h3 className="results-details">
+            When: {this.props.event.start.date}
+          </h3>
+
+          <hr />
+          <div className="results-details">{performanceHeader}</div>
+          <ul>
+            {this.props.event.performance.map(performanceDetails => (
+              <li className="artist-list" key={performanceDetails.id}>
+                {performanceDetails.artist.displayName}
+              </li>
+            ))}
+          </ul>
+          <a className="sk-link" href={this.props.event.uri}>
+            See it on songkick!
+          </a>
+        </div>
       </div>
     );
   }
