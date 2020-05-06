@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import MusicEventMatch from "./MusicEventMatch";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-    <MusicEventMatch message="Message from Props" />
+    <MusicEventMatch />
   </React.StrictMode>,
   document.getElementById("root")
 );
