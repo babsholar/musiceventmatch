@@ -37,6 +37,7 @@ img.header-logo {
 
 .header-nav a {
   float: left;
+  padding-top: 12px;
   padding-bottom: 12px;
   color: white;
   text-decoration: none;
@@ -55,6 +56,10 @@ img.header-logo {
 
 .header-nav a:visited {
   color: white;
+}
+
+.header-nav ul {
+  margin: 0;
 }
 
 button.reset {
@@ -334,7 +339,18 @@ div.results-details {
     font-size: 10px;
     height: 350px;
     width: 250px;
-    margin-left: 70px;
+    margin-left: 45px;
+  }
+
+  .location-card {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    font-size: 10px;
+    height: 250px;
+    width: 250px;
+    margin-left: 5px;
+    margin-right: 100px;
   }
 
   .view-button {

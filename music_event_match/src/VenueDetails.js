@@ -29,7 +29,8 @@ class VenueDetails extends React.Component {
         return (
           <div className="venue">
             <div>
-              <p>Venue: {this.props.venue.displayName}</p>
+              <p>Venue Address: </p>
+              <p>{this.props.venue.street}</p>
               <button type="button" onClick={() => this.hideDetails()}>
                 Close
               </button>
