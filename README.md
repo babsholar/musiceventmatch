@@ -24,7 +24,7 @@ The user will be able to do the following:
 ## Milestones
 
 1. Creation of search form component and ability to search for music events in the specified metro area.
-2. Implement songkick api call searching for upcoming music events.
+2. Implement songkick api calls for searching metro area's, events, and venue details.
 3. Creation of display list component, which will display upcoming music events in the specified metro area.
 4. Style pages
 
