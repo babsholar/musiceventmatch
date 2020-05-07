@@ -8,6 +8,7 @@ class Search extends React.Component {
 
     this.state = {
       loading: false,
+      hasSearched: false,
       city: "",
       locations: []
     };
@@ -27,7 +28,8 @@ class Search extends React.Component {
     this.setState({
       city: this.state.city,
       locations: this.state.locations,
-      loading: true
+      loading: true,
+      hasSearched: true
     });
 
     const fetchUrl = `/songkick/metroLocations?city=${city}`;
@@ -42,14 +44,16 @@ class Search extends React.Component {
           this.setState({
             city: this.state.city,
             locations: JSON.parse(data),
-            loading: false
+            loading: false,
+            hasSearched: this.state.hasSearched
           });
         } else {
           // user entered a bad city name, or no result
           this.setState({
             city: this.state.city,
             locations: [],
-            loading: false
+            loading: false,
+            hasSearched: this.state.hasSearched
           });
         }
       })
@@ -60,7 +64,8 @@ class Search extends React.Component {
     this.setState({
       city: this.state.city,
       locations: this.state.locations,
-      loading: true
+      loading: true,
+      hasSearched: false
     });
 
     const fetchUrl = `/songkick/upcomingEvents?metroId=${metroId}`;
@@ -72,7 +77,8 @@ class Search extends React.Component {
         this.setState({
           city: this.state.city,
           locations: [],
-          loading: false
+          loading: false,
+          hasSearched: this.state.hasSearched
         });
       })
       .catch(err => console.log(err));
@@ -85,7 +91,8 @@ class Search extends React.Component {
   onHandleChange(e) {
     console.log("Change!");
     this.setState({
-      city: e.target.value
+      city: e.target.value,
+      hasSearched: false
     });
   }
 
@@ -107,6 +114,19 @@ class Search extends React.Component {
 
   render() {
     let locationsData;
+    let emptySearchResults;
+
+    if (
+      this.state.hasSearched &&
+      this.state.locations.length === 0 &&
+      !this.state.loading
+    ) {
+      emptySearchResults = (
+        <h2 class="empty">Didn't find a result for: {this.state.city}</h2>
+      );
+    } else {
+      emptySearchResults = null;
+    }
 
     if (this.state.loading) {
       locationsData = (
@@ -152,7 +172,7 @@ class Search extends React.Component {
           >
             Search
           </button>
-
+          {emptySearchResults}
           {locationsData}
         </form>
       </div>

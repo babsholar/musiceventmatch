@@ -140,6 +140,13 @@ ul {
   list-style: none;
 }
 
+.empty {
+  text-align: center;
+  color: black;
+  font-family: staatliches;
+  letter-spacing: 3px;
+}
+
 /* Location Card Styles */
 
 .lo-card {

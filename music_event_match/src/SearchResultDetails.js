@@ -47,6 +47,7 @@ class SearchResultDetails extends React.Component {
   render() {
     let performanceHeader;
     let venueDetailsButton;
+    let searchResultDetails;
 
     if (this.props.event.performance.length > 1) {
       performanceHeader = <h3>Artists:</h3>;
@@ -72,15 +73,17 @@ class SearchResultDetails extends React.Component {
       );
     }
 
-    return (
-      <div className="results-container">
+    if (this.state.viewingVenueDetails) {
+      searchResultDetails = (
         <VenueDetails
           show={this.state.viewingVenueDetails}
           loading={this.state.loading}
           venue={this.state.selectedVenue}
           onHideDetails={this.closeVenueDetails}
         />
-
+      );
+    } else {
+      searchResultDetails = (
         <div className="results-cards">
           <h2 className="results-details">{this.props.event.displayName}</h2>
           <hr />
@@ -110,8 +113,10 @@ class SearchResultDetails extends React.Component {
             See it on songkick!
           </a>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return <div className="results-container">{searchResultDetails}</div>;
   }
 }
 

@@ -6,7 +6,7 @@ class SearchResult extends React.Component {
     if (!this.props.results) {
       return null;
     } else if (this.props.results.empty) {
-      return <h2>{this.props.results.empty}</h2>;
+      return <h2 className="empty">{this.props.results.empty}</h2>;
     }
     return (
       <div>
