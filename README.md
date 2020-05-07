@@ -42,5 +42,7 @@ In order to run the application you will need a .env file in project root with t
 To run, complete the following steps:
 * Navigate to project root. (will need two terminals open, one for server, one for client)
 * Install node modules: `npm install`
+* Create .env at project root: `touch .env`
+* Insert required environment variable at line 1 of .env: `REACT_APP_SKK=<SONGKICK_API_KEY>`
 * Start the express server: `npm run server`
 * Start the client app: `npm run start`
